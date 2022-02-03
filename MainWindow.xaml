@@ -1,0 +1,100 @@
+﻿<Window x:Class="BuyersAndOrders.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BuyersAndOrders"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="595" Width="925" Closing="Window_Closing" FontSize="14" MinWidth="925" MinHeight="595" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FFFFFFE6">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="670*"/>
+            <ColumnDefinition Width="240*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.Column="1" Grid.RowSpan="1000" Fill="#FFE1DFC2"/>
+        <Button x:Name="ListOfItemsButton" Content="Список товаров" HorizontalAlignment="Left" Height="60" Margin="0,35,0,0" VerticalAlignment="Top" Width="235" Grid.Column="1" FontSize="14" FontWeight="Bold" Background="#FFE1E18D" Click="ListOfItemsButton_Click">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <DataGrid x:Name="ItemsDataGrid" Margin="0,55,5,0" SelectionMode="Single" ContextMenuOpening="ItemsDataGrid_ContextMenuOpening" VerticalAlignment="Top" HorizontalAlignment="Center" Height="500" Width="665" Background="#FFE1DFC2" Visibility="Hidden"  >
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Наименование" Binding="{Binding Name}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Артикул" Binding="{Binding ArticleNumber}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Цена"  Binding="{Binding Price}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Количество"  Binding="{Binding AmountLeft}" />
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu x:Name="ItemsContextMenu" >
+                    <MenuItem x:Name="AddToCartMenuItem" Header="Добавить выбранный товар в корзину" Click="AddToCartMenuItem_Click" />
+                    <MenuItem x:Name="MakeDefectMenuItem" Header="Сделать выбранный товар бракованным" Click="MakeDefectMenuItem_Click" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <Button x:Name="ShowOrdersButton" Content="Список оформленных заказов" HorizontalAlignment="Left" Height="60" Margin="0,95,0,0" VerticalAlignment="Top" Width="235" Click="ShowOrdersButton_Click" Grid.Column="1" FontSize="14" FontWeight="Bold" Visibility="Visible" Background="#FFE1E18D">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <DataGrid x:Name="OrdersDataGrid" Margin="0,55,5,0" SelectionMode="Single" ContextMenuOpening="OrdersDataGrid_ContextMenuOpening" VerticalAlignment="Top" HorizontalAlignment="Center" Height="500" Width="665" Background="#FFE1DFC2" Visibility="Hidden">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Номер заказа" Binding="{Binding OrderNumber}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Логин клиента" Binding="{Binding OrderingClientLogin}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Время заказа"  Binding="{Binding OrderDate}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Стоимость заказа"  Binding="{Binding OrderPrice}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Статус заказа"  Binding="{Binding StringStatus}" />
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu x:Name="SellersContextMenu" >
+                    <MenuItem x:Name="MakeProcessedMenuItem" Header="Обработать заказ" Click="MakeProcessedMenuItem_Click"/>
+                    <MenuItem x:Name="MakeShippedMenuItem" Header="Отгрузить заказ" Click="MakeShippedMenuItem_Click"/>
+                    <MenuItem x:Name="MakeExecutedMenuItem" Header="Исполнить заказ" Click="MakeExecutedMenuItem_Click"/>
+                    <MenuItem x:Name="OrderItemsMenuItem" Header="Детали заказа" Click="OrderItemsMenuItem_Click"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <Label x:Name="ListOfOrdersLabel" Content="Список всех оформленных заказов:" HorizontalAlignment="Center" Height="50" Margin="0,10,0,0" VerticalAlignment="Top" Width="660" FontWeight="Bold" FontSize="14"/>
+        <Button x:Name="OnlyActiveOrdersButton" Content="Список только активных заказов" HorizontalAlignment="Left" Height="60" Margin="0,155,0,0" VerticalAlignment="Top" Width="235" Click="OnlyActiveOrdersButton_Click" Grid.Column="1" FontSize="14" FontWeight="Bold" Background="#FFE1E18D" Visibility="Hidden">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Label x:Name="StatusLabel" Content="Статус: Продавец" Grid.Column="1" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="235" FontSize="14" FontWeight="Bold"/>
+        <DataGrid x:Name="ClientsDataGrid" Margin="0,55,5,0" HorizontalAlignment="Center" VerticalAlignment="Top" SelectionMode="Single" Height="500" Width="665" Background="#FFE1DFC2" MouseDoubleClick="ClientsDataGrid_MouseDoubleClick" Visibility="Hidden">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Логин" Binding="{Binding Login}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="ФИО" Binding="{Binding FullName}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Номер телефона"  Binding="{Binding PhoneNumber}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Адрес"  Binding="{Binding Adress}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="ListOfCLientsButton" Content="Список клиентов" HorizontalAlignment="Left" Height="60" Margin="0,215,0,0" VerticalAlignment="Top" Width="235" Click="ListOfCLientsButton_Click" FontSize="14" FontWeight="Bold" Grid.Column="1" Background="#FFE1E18D" Visibility="Hidden">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="ListOfCLientsWithDefectItemButton" Content="Список клиентов,&#xD;&#xA; заказавших бракованный товар" HorizontalAlignment="Left" Height="60" Margin="0,275,0,0" VerticalAlignment="Top" Width="235" FontSize="14" FontWeight="Bold" Grid.Column="1" Background="#FFE1E18D" Click="ListOfCLientsWithDefectItemButton_Click" Visibility="Hidden">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="ListOfCLientsMoreThanPriceButton" Content="Список клиентов, оплативших &#xD;&#xA;заказы на сумму выше заданной" HorizontalAlignment="Left" Height="60" Margin="0,395,0,0" VerticalAlignment="Top" Width="235" FontSize="14" FontWeight="Bold" Grid.Column="1" Background="#FFE1E18D" Click="ListOfCLientsMoreThanPriceButton_Click" Visibility="Hidden">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Label x:Name="DefectItemLabel" Content="Бракованный товар:" Grid.Column="1" HorizontalAlignment="Left" Height="60" Margin="0,335,0,0" VerticalAlignment="Top" Width="236" FontStyle="Italic" Visibility="Hidden"/>
+        <Label x:Name="MinPriceLable" Content="Заданная сумма:" Grid.Column="1" HorizontalAlignment="Left" Height="45" Margin="0,455,0,0" VerticalAlignment="Top" Width="120" FontStyle="Italic" Visibility="Hidden"/>
+        <TextBox x:Name="MinPriceTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="30" Margin="120,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115" Visibility="Hidden"/>
+        <Button x:Name="ExitButton" Content="Выйти из учетной записи" HorizontalAlignment="Left" Height="60" Margin="0,495,0,0" VerticalAlignment="Top" Width="235" FontSize="14" FontWeight="Bold" Background="#FFE1E18D" Grid.Column="1" Click="ExitButton_Click">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="ShowCartButton" Content="Корзина" HorizontalAlignment="Left" Height="60" Margin="0,155,0,0" VerticalAlignment="Top" Width="235"  Click="ShowCartButton_Click" Grid.Column="1" Visibility="Visible" FontSize="14" FontWeight="Bold" Background="#FFE1E18D">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+    </Grid>
+</Window>

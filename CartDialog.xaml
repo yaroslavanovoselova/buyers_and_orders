@@ -1,0 +1,26 @@
+﻿<Window x:Class="BuyersAndOrders.CartDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BuyersAndOrders"
+        mc:Ignorable="d"
+        Title="Список товаров" Height="520" Width="640" MinHeight="520" MinWidth="640">
+    <Grid Background="#FFFFFFE6">
+        <Button x:Name="MakeOrderButton" Content="Оформить заказ" HorizontalAlignment="Left" Height="50" Margin="470,430,0,0" VerticalAlignment="Top" Width="140" FontSize="14" FontWeight="Bold" Background="#FFE1E18D" Click="MakeOrderButton_Click"/>
+        <DataGrid x:Name="ItemsDataGrid" Margin="10,10,0,0" Height="380" Width="600" Background="#FFE1DFC2" SelectionMode="Single" AutoGenerateColumns="False" ContextMenuOpening="ItemsDataGrid_ContextMenuOpening" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Наименование" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Артикул" Binding="{Binding Path=ArticleNumber}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Цена за шт."  Binding="{Binding Path=Price}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Количество"  Binding="{Binding Path=AmountLeft}" />
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu x:Name="CartItemsContextMenu" >
+                    <MenuItem x:Name="DeleteFromCartMenuItem" Header="Удалить выбранный товар из корзины" Click="DeleteFromCartMenuItem_Click" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <Label x:Name="OrderPriceLabel" Content="Общая стоимость:" HorizontalAlignment="Left" Height="35" Margin="341,395,0,0" VerticalAlignment="Top" Width="269" FontSize="14"/>
+    </Grid>
+</Window>
